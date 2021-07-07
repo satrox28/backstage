@@ -54,9 +54,11 @@ import { apis } from './apis';
 import { Root } from './components/Root';
 import { entityPage } from './components/catalog/EntityPage';
 import { searchPage } from './components/search/SearchPage';
+import { HomePage } from './components/home/HomePage';
+
 import { providers } from './identityProviders';
 import * as plugins from './plugins';
-import { HomePage } from '@backstage/plugin-home';
+// import { HomePage } from '@backstage/plugin-home';
 
 const app = createApp({
   apis,
