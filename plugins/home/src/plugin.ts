@@ -17,6 +17,7 @@ import {
   createPlugin,
   createRoutableExtension,
 } from '@backstage/core-plugin-api';
+import { createHomePageComponentExtension } from './extensions';
 
 import { rootRouteRef } from './routes';
 
@@ -27,10 +28,27 @@ export const homePlugin = createPlugin({
   },
 });
 
-export const HomePage = homePlugin.provide(
+export const HomeIndexPage = homePlugin.provide(
   createRoutableExtension({
-    component: () =>
-      import('./components/ExampleComponent').then(m => m.ExampleComponent),
+    component: () => import('./components').then(m => m.HomeIndexPage),
     mountPoint: rootRouteRef,
+  }),
+);
+
+export const RandomJokeHomePageComponent = homePlugin.provide(
+  createHomePageComponentExtension({
+    title: 'Random Joke',
+    component: () =>
+      import('./homePageComponents/RandomJoke/Component').then(
+        m => m.Component,
+      ),
+    actions: () =>
+      import('./homePageComponents/RandomJoke/Actions').then(m => m.Actions),
+    contextProvider: () =>
+      import('./homePageComponents/RandomJoke/Context').then(
+        m => m.ContextProvider,
+      ),
+    settings: () =>
+      import('./homePageComponents/RandomJoke/Settings').then(m => m.Settings),
   }),
 );

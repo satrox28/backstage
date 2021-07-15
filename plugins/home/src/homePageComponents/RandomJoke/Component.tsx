@@ -13,4 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { ExampleComponent } from './ExampleComponent';
+
+import React from 'react';
+import Context from './Context';
+
+export const Component = () => {
+  const { joke, loading } = React.useContext(Context);
+
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <div>
+      <p>{joke.setup}</p>
+      <p>{joke.punchline}</p>
+    </div>
+  );
+};

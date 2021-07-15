@@ -20,6 +20,7 @@ import {
   OAuthRequestDialog,
   SignInPage,
 } from '@backstage/core-components';
+import { HomeIndexPage } from '@backstage/plugin-home';
 import { apiDocsPlugin, ApiExplorerPage } from '@backstage/plugin-api-docs';
 import {
   CatalogEntityPage,
@@ -58,7 +59,6 @@ import { HomePage } from './components/home/HomePage';
 
 import { providers } from './identityProviders';
 import * as plugins from './plugins';
-// import { HomePage } from '@backstage/plugin-home';
 
 const app = createApp({
   apis,
@@ -102,7 +102,9 @@ const AppRouter = app.getRouter();
 const routes = (
   <FlatRoutes>
     <Navigate key="/" to="/home" />
-    <Route path="/home" element={<HomePage />} />
+    <Route path="/home" element={<HomeIndexPage />}>
+      <HomePage />
+    </Route>
     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"

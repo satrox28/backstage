@@ -13,4 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { ExampleFetchComponent } from './ExampleFetchComponent';
+
+import React, { ReactNode } from 'react';
+import { useOutlet } from 'react-router';
+
+export const HomeIndexPage = (props: { children?: ReactNode }) => {
+  const outlet = useOutlet();
+  const children = props.children ?? outlet;
+  return <React.Fragment>{children}</React.Fragment>;
+};

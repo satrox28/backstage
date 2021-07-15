@@ -15,21 +15,34 @@
  */
 
 import React from 'react';
-import { Content, Header, Lifecycle, Page } from '@backstage/core-components';
-import Grid from '@material-ui/core/Grid';
-import { RandomJokeHomePageComponent } from '@backstage/plugin-home';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@material-ui/core';
 
-export const HomePage = () => {
+export const SettingsModal = ({
+  open,
+  close,
+  componentName,
+  children,
+}: {
+  open: boolean;
+  close: Function;
+  componentName: string;
+  children: JSX.Element;
+}) => {
   return (
-    <Page themeId="home">
-      <Header title="Home" subtitle={<Lifecycle alpha />} />
-      <Content>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={4}>
-            <RandomJokeHomePageComponent />
-          </Grid>
-        </Grid>
-      </Content>
-    </Page>
+    <Dialog open={open} onClose={() => close()}>
+      <DialogTitle>Settings - {componentName}</DialogTitle>
+      <DialogContent>{children}</DialogContent>
+      <DialogActions>
+        <Button onClick={() => close()} color="primary" variant="contained">
+          Close
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };

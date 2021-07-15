@@ -14,9 +14,16 @@
  * limitations under the License.
  */
 
-export {
-  homePlugin,
-  HomeIndexPage,
-  RandomJokeHomePageComponent,
-} from './plugin';
-export { SettingsModal } from './components';
+import React from 'react';
+
+import { Button } from '@material-ui/core';
+import Context from './Context';
+
+export const Actions = () => {
+  const { rerollJoke } = React.useContext(Context);
+  return (
+    <Button variant="contained" color="primary" onClick={() => rerollJoke()}>
+      Reroll
+    </Button>
+  );
+};
