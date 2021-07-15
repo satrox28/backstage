@@ -26,27 +26,15 @@ type Joke = {
   punchline: string;
 };
 
-type State = {
+type RandomJokeContextValue = {
   loading: boolean;
   joke: Joke;
   type: JokeType;
-};
-
-type Handlers = {
   rerollJoke: Function;
   handleChangeType: Function;
 };
 
-const Context = createContext<State & Handlers>({
-  loading: true,
-  joke: {
-    setup: '',
-    punchline: '',
-  },
-  type: 'programming' as JokeType,
-  rerollJoke: () => {},
-  handleChangeType: (t: JokeType) => {},
-});
+const Context = createContext<RandomJokeContextValue | undefined>(undefined);
 
 const getNewJoke = (type: string): Promise<Joke> =>
   fetch(
@@ -86,19 +74,25 @@ export const ContextProvider = ({
     rerollJoke();
   }, [rerollJoke]);
 
-  return (
-    <Context.Provider
-      value={{
-        loading,
-        joke,
-        type,
-        rerollJoke,
-        handleChangeType,
-      }}
-    >
-      {children}
-    </Context.Provider>
-  );
+  const value: RandomJokeContextValue = {
+    loading,
+    joke,
+    type,
+    rerollJoke,
+    handleChangeType,
+  };
+
+  return <Context.Provider value={value}>{children}</Context.Provider>;
+};
+
+export const useRandomJoke = () => {
+  const context = React.useContext(Context);
+
+  if (context === undefined) {
+    throw new Error('useRandomJoke must be used within a RandomQuoteProvider');
+  }
+
+  return context;
 };
 
 export default Context;

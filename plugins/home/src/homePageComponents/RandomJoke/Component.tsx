@@ -15,10 +15,10 @@
  */
 
 import React from 'react';
-import Context from './Context';
+import { useRandomJoke } from './Context';
 
 export const Component = () => {
-  const { joke, loading } = React.useContext(Context);
+  const { joke, loading } = useRandomJoke();
 
   if (loading) return <p>Loading...</p>;
 

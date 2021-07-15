@@ -21,10 +21,10 @@ import {
   Radio,
 } from '@material-ui/core';
 import React from 'react';
-import Context, { JokeType } from './Context';
+import { useRandomJoke, JokeType } from './Context';
 
 export const Settings = () => {
-  const { type, handleChangeType } = React.useContext(Context);
+  const { type, handleChangeType } = useRandomJoke();
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">Joke Type</FormLabel>

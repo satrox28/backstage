@@ -17,10 +17,10 @@
 import React from 'react';
 
 import { Button } from '@material-ui/core';
-import Context from './Context';
+import { useRandomJoke } from './Context';
 
 export const Actions = () => {
-  const { rerollJoke } = React.useContext(Context);
+  const { rerollJoke } = useRandomJoke();
   return (
     <Button variant="contained" color="primary" onClick={() => rerollJoke()}>
       Reroll
